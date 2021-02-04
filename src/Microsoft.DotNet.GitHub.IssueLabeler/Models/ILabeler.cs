@@ -12,5 +12,10 @@ namespace Microsoft.DotNet.GitHub.IssueLabeler
     public interface ILabeler
     {
         Task<LabelSuggestion> PredictUsingModelsFromStorageQueue(string owner, string repo, int number);
+        Task AddUntriagedIssuesToProjectBoard(string owner, string repo);
+        Task MoveFromUncommittedToFuture(string owner, string repo);
+        Task AddToPrColumn(string owner, string repo);
+        Task AddMissingTriagedFuture(string owner, string repo);
+        Task AddMissingTriaged6_0(string owner, string repo);
     }
 }

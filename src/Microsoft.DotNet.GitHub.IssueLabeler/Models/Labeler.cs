@@ -43,6 +43,30 @@ namespace Microsoft.DotNet.GitHub.IssueLabeler
             _useIssueLabelerForPrsToo = configuration.GetSection(("UseIssueLabelerForPrsToo")).Get<bool>();
         }
 
+        public async Task AddMissingTriaged6_0(string owner, string repo)
+        {
+            await _gitHubClientWrapper.AddMissingTriaged6_0(owner, repo);
+        }
+
+        public async Task AddMissingTriagedFuture(string owner, string repo)
+        {
+            await _gitHubClientWrapper.AddMissingTriagedFuture(owner, repo);
+        }
+
+        public async Task AddToPrColumn(string owner, string repo)
+        {
+            await _gitHubClientWrapper.AddToPrColumn(owner, repo);
+        }
+        public async Task MoveFromUncommittedToFuture(string owner, string repo)
+        {
+            await _gitHubClientWrapper.MoveFromUncommittedToFuture(owner, repo);
+        }
+
+        public async Task AddUntriagedIssuesToProjectBoard(string owner, string repo)
+        {
+            await _gitHubClientWrapper.AddCardToProject(owner, repo);
+        }
+
         public async Task<LabelSuggestion> PredictUsingModelsFromStorageQueue(string owner, string repo, int number)
         {
             if (_regex == null)

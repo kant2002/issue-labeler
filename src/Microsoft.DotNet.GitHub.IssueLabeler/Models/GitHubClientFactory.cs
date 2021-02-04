@@ -57,6 +57,27 @@ namespace Microsoft.DotNet.GitHub.IssueLabeler.Data
             return CreateForToken(installationTokenResult.Token, AuthenticationType.Oauth);
         }
 
+        public GitHubClient GetUserClient()
+        {
+            const string UserSecretKey = "GitHubAccessToken";
+
+            var config = new ConfigurationBuilder()
+                .AddUserSecrets("AspNetHello.App")
+                .Build();
+
+            var gitHubAccessToken = config[UserSecretKey];
+            if (string.IsNullOrEmpty(gitHubAccessToken))
+            {
+                throw new InvalidOperationException($"Couldn't find User Secret named '{UserSecretKey}' in configuration.");
+            }
+
+            var productInformation = new ProductHeaderValue("MLGitHubLabeler");
+            return new GitHubClient(productInformation)
+            {
+                Credentials = new Credentials(gitHubAccessToken)
+            };
+        }
+
         private static GitHubClient CreateForToken(string token, AuthenticationType authenticationType)
         {
             var productInformation = new ProductHeaderValue("issuelabelertemplate");

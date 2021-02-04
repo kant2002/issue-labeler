@@ -96,5 +96,45 @@ namespace Microsoft.DotNet.GitHub.IssueLabeler
             // TODO test this
             return BadRequest("Models need to load before requesting for predictions. Wait until the models are loaded");
         }
+
+        [HttpGet("project/{owner}/{repo}")]
+        public async Task<IActionResult> AddUntriagedIssuesToProjectBoard(string owner, string repo)
+        {
+            // find all issues which have untriaged label and have either of the following labels too
+            await _labeler.AddUntriagedIssuesToProjectBoard(owner, repo);
+            return Ok("ok");
+        }
+
+        [HttpGet("future/{owner}/{repo}")]
+        public async Task<IActionResult> MoveFromUncommittedToFuture(string owner, string repo)
+        {
+            // find all issues which have untriaged label and have either of the following labels too
+            await _labeler.MoveFromUncommittedToFuture(owner, repo);
+            return Ok("ok");
+        }
+
+        [HttpGet("prcolumn/{owner}/{repo}")]
+        public async Task<IActionResult> AddToPrColumn(string owner, string repo)
+        {
+            // find all issues which have untriaged label and have either of the following labels too
+            await _labeler.AddToPrColumn(owner, repo);
+            return Ok("ok");
+        }
+
+        [HttpGet("missingfuture/{owner}/{repo}")]
+        public async Task<IActionResult> AddMissingTriagedFuture(string owner, string repo)
+        {
+            // find all issues which have untriaged label and have either of the following labels too
+            await _labeler.AddMissingTriagedFuture(owner, repo);
+            return Ok("ok");
+        }
+
+        [HttpGet("missing6oh/{owner}/{repo}")]
+        public async Task<IActionResult> AddMissingTriaged6_0(string owner, string repo)
+        {
+            // find all issues which have untriaged label and have either of the following labels too
+            await _labeler.AddMissingTriaged6_0(owner, repo);
+            return Ok("ok");
+        }
     }
 }
