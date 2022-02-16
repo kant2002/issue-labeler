@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DotNet.GitHub.IssueLabeler
 {
-    [Route("api/WebhookIssue")]
+    [Route("api/PredictionEngine")]
     public class PredictionEngineController : Controller
     {
         private ILabeler _labeler { get; set; }
